@@ -1,23 +1,23 @@
  /*
     Xvideos X JSBox
 
-    你口袋里的观影利器。
+    Your pocket-sized video viewer.
 
-    以短视频为主，涵盖各种类型包括重口味、小清新、自拍...
+    Mainly short videos, covering all kinds of categories including hardcore, softcore, and amateur...
 
-    脚本特点：
+    Script features:
 
-    1.无广告困扰，想看就看；
+    1. No ads, watch anytime;
 
-    2.支持收藏，方便巩固温习;
+    2. Supports favorites for easy revisit;
 
-    3.支持下载，分高低两种画质。
+    3. Supports downloads in low and high quality.
 
-    注：源码来自 wind. 经 Nicked 修改。
+    Note: Source code from wind, modified by Nicked.
 
-    联系：https://t.me/nicked
+    Contact: https://t.me/nicked
 
-    Tips: 轻按时间戳收藏视频，长按时间戳下载视频。
+    Tips: Tap timestamp to favorite a video, long-press timestamp to download.
 
    */
 
@@ -84,31 +84,31 @@ const searchPreview = {
 
 const filters = {
   "sort": {
-    "相关度": "relevance",
-    "上传日期": "uploaddate",
-    "评分": "rating",
-    "时长": "length",
-    "观看次数": "views"
+    "Relevance": "relevance",
+    "Upload Date": "uploaddate",
+    "Rating": "rating",
+    "Duration": "length",
+    "Views": "views"
   },
   "datef": {
-    "不限": "all",
-    "最近三天": "today",
-    "本周": "week",
-    "本月": "month",
-    "最近三月": "3month",
-    "最近六月": "6month"
+    "Any": "all",
+    "Last 3 Days": "today",
+    "This Week": "week",
+    "This Month": "month",
+    "Last 3 Months": "3month",
+    "Last 6 Months": "6month"
   },
   "durf": {
-    "不限": "allduration",
-    "1-3分钟": "1-3min",
-    "3-10分钟": "3-10min",
-    "10-20分钟": "10-20min",
-    "20分钟+": "20min_more"
+    "Any": "allduration",
+    "1-3 min": "1-3min",
+    "3-10 min": "3-10min",
+    "10-20 min": "10-20min",
+    "20+ min": "20min_more"
   },
   "typef": {
-    "直男": "straight",
-    "男同": "gay",
-    "人妖": "shemale"
+    "Straight": "straight",
+    "Gay": "gay",
+    "Shemale": "shemale"
   }
 }
 
@@ -217,14 +217,14 @@ const searchFilterView = {
     make.height.equalTo(0)
   },
   views: [
-    makeView("排序方式", "sort", 0),
-    makeView("日期", "datef", 1),
-    makeView("时长", "durf", 2),
-    makeView("类型", "typef", 3),
+    makeView("Sort", "sort", 0),
+    makeView("Date", "datef", 1),
+    makeView("Duration", "durf", 2),
+    makeView("Type", "typef", 3),
     {
       type: "button",
       props: {
-        title: "重置条件",
+        title: "Reset Filters",
         radius: 0,
         bgcolor: $color("white"),
         titleColor: $color("darkGray")
@@ -254,7 +254,7 @@ const searchFilterView = {
     }, {
       type: "button",
       props: {
-        title: "应用条件",
+        title: "Apply Filters",
         radius: 0,
         bgcolor: $color("white"),
         titleColor: $color("black")
@@ -311,7 +311,7 @@ const searchVideoListView = {
           id: "input",
           bgcolor: $color("#ffffff"),
           textColor: $color("darkGray"),
-          placeholder:"输入关键字搜索...",
+          placeholder:"Enter keywords to search...",
           clearButtonMode:0,
           font: $font(13),
           clearsOnBeginEditing: true,
@@ -358,7 +358,7 @@ const searchVideoListView = {
         type: "button",
         props: {
           id:"Filters",       
-          title: "筛选器",
+          title: "Filters",
           font:$font("bold",14),
           bgcolor: $rgba(0,0,0,0.2),
           titleColor: $color("white"),
@@ -617,7 +617,7 @@ const localVideoListView = {
     pulled(sender) {
           $("localFavVideoList").endRefreshing()
           $ui.menu({
-            items: ["微信打赏"],
+            items: ["WeChat Donation"],
             handler: function(title, idx) {
               if (idx == 0) {
                 wechatPay()
@@ -1004,7 +1004,7 @@ const mainUI = {
     type: "menu",
     props: {
       id: "menu",
-      items: ["收藏","搜索", /*"明星",*/ "频道"]
+      items: ["Favorites","Search", /*"Stars",*/ "Channels"]
     },
     layout: function(make) {
       make.top.left.right.inset(0)
@@ -1170,7 +1170,7 @@ var views = /duration">[\s\S]*?\s(\d{1,3}\.?\d?[kM]?)\s/.exec(i)[1]
       var rows = searchPage !=0 ? $("searchVideoList").data[0].rows.concat(items) : items;
       $("searchVideoList").endFetchingMore();
       $("searchVideoList").data = [{
-        title: searchKeyword ? `${searchKeyword}   (${rows.length}/${count})` : "最近更新",
+        title: searchKeyword ? `${searchKeyword}   (${rows.length}/${count})` : "Latest Updates",
         rows: rows
       }];
       $("footer").text = "Page" + (searchPage + 1) + " Done!";
@@ -1231,7 +1231,7 @@ function getStarVideoList() {
         })
       });
       var data = [{
-        title: `第 ${videoPage+1} 页`,
+        title: `Page ${videoPage+1}`,
         rows: items
       }];
       $("videoList").endFetchingMore();
@@ -1288,7 +1288,7 @@ function getChannelVideoList() {
         })
       });
       var data = [{
-        title: `第 ${videoPage+1} 页`,
+        title: `Page ${videoPage+1}`,
         rows: items
       }];
       $("videoList").endFetchingMore();
@@ -1392,7 +1392,7 @@ function getChannelList() {
 
 function play(url, indexPath, mode) {
   $ui.loading(true);
-  $ui.toast("正在获取视频地址……", 100);
+  $ui.toast("Fetching video URL...", 100);
   $http.get({
     url: domain + url,
     handler: function(resp) {
@@ -1440,7 +1440,7 @@ function play(url, indexPath, mode) {
 
 function download(url,name) {
   $ui.menu({
-    items: ["低画质下载", "高画质下载","复制下载地址","Safari打开","nplayer打开"],
+    items: ["Download Low Quality", "Download High Quality","Copy Download URL","Open in Safari","Open in nPlayer"],
     handler: async function(title, idx) {
       switch (idx) {
         case 0:
@@ -1453,10 +1453,10 @@ function download(url,name) {
           break;
         case 2:
           selectReg = /setVideoUrlHigh\('(.*?)'\)/g
-          $ui.toast("地址获取中...")
+          $ui.toast("Getting URL...")
           let dUrl = domain + url
           let resp = await $http.get(domain+url);
-          $ui.toast("复制成功！")
+          $ui.toast("Copied successfully!")
           $clipboard.text = selectReg.exec(resp.data)[1];
           break
         case 3:
@@ -1466,7 +1466,7 @@ function download(url,name) {
           break;
         case 4:
           selectReg = /setVideoUrlHigh\('(.*?)'\)/g
-          $ui.toast("地址获取中...")
+          $ui.toast("Getting URL...")
           let r = await $http.get(domain+url);
           videoUrl = selectReg.exec(r.data)[1];
           $app.openURL("nplayer-" + videoUrl)
@@ -1486,10 +1486,10 @@ function download(url,name) {
 //                var precent = (write / total * 100).toFixed(1);
 //                var totalSize = total / 1000 < 1000 ? (total / 1000).toFixed(1) + "KB" : (total / 1000 / 1000).toFixed(1) + "MB";
 //                var writeSize = write / 1000 < 1000 ? write / 1000 : write / 1000 / 1000;
-//                $ui.toast(`⏳下载中......${writeSize.toFixed(1)}/${totalSize}(${precent}%)`, 1)
+//                $ui.toast(`⏳Downloading...${writeSize.toFixed(1)}/${totalSize}(${precent}%)`, 1)
 //              },
 //              handler: function(resp) {
-//                $ui.toast("✅ 下载完成已存至脚本文件管理器内", 1);
+//                $ui.toast("✅ Download complete. Saved in script file manager.", 1);
 //                let types = resp.data.fileName.split(".").pop()
 //                let path = name +"."+types
 //                let i = 1
@@ -1525,10 +1525,10 @@ function downloadVideo(url){
                 var precent = (write / total * 100).toFixed(1);
                 var totalSize = total / 1000 < 1000 ? (total / 1000).toFixed(1) + "KB" : (total / 1000 / 1000).toFixed(1) + "MB";
                 var writeSize = write / 1000 < 1000 ? write / 1000 : write / 1000 / 1000;
-                $ui.toast(`⏳下载中......${writeSize.toFixed(1)}/${totalSize}(${precent}%)`, 1)
+                $ui.toast(`⏳Downloading...${writeSize.toFixed(1)}/${totalSize}(${precent}%)`, 1)
               },
               handler: function(resp) {
-                $ui.toast("✅ 下载完成已存至脚本文件管理器内", 1);
+                $ui.toast("✅ Download complete. Saved in script file manager.", 1);
                 let types = resp.data.fileName.split(".").pop()
                 let path = name +"."+types
                 let i = 1
@@ -1562,7 +1562,7 @@ function escapeStr(str) {
 function videoInfoButtonTapped(data) {
   if (LocalFavVideos.indexOf(data.id) > -1) {
     //videoFavoriteUpdate("del", data)
-    $ui.toast("❌ 已经在收藏列表")
+    $ui.toast("❌ Already in favorites")
   } else {
     videoFavoriteUpdate("add", data)
   }
@@ -1573,13 +1573,13 @@ function videoFavoriteUpdate(mode, data) {
     case "add":
       LocalData.favorites.push(data);
       LocalFavVideos.push(data.id);
-      $ui.toast("✅ 已收藏", 0.5);
+      $ui.toast("✅ Added to favorites", 0.5);
       break;
     case "del":
       var idx = LocalFavVideos.indexOf(data.id);
       LocalData.favorites.splice(idx, 1);
       LocalFavVideos.splice(idx, 1);
-      $ui.toast("❌ 已删除", 0.5);
+      $ui.toast("❌ Removed", 0.5);
       break;
   };
   writeCache()
@@ -1614,13 +1614,13 @@ function getLocalFavVideos() {
     }
   });
   $("localFavVideoList").data = [{
-    title: `${rows.length} 个收藏`,
+    title: `${rows.length} favorites`,
     rows: rows
   }]
 }
 
 
-//检测扩展更新
+// Check add-in update
 function scriptVersionUpdate() {
   $http.get({
     url:
@@ -1629,7 +1629,7 @@ function scriptVersionUpdate() {
       var afterVersion = resp.data.version;
       var msg = resp.data.msg;
       if (afterVersion > version) {
-        $ui.toast("发现更新，安装中...",10);
+        $ui.toast("Update found, installing...",10);
 
         $http.download({
           url:
@@ -1650,7 +1650,7 @@ function scriptVersionUpdate() {
                   });
 
                   $ui.alert({
-                    title: "更新已完成",
+                    title: "Update completed",
                     actions: [
                       {
                         title: "OK",
@@ -1712,7 +1712,7 @@ const checkAdultView = {
   }, {
     type: "text",
     props: {
-      text: "警告 ⚠️",
+      text: "WARNING ⚠️",
       textColor: $color("white"),
       font: $font("Helvetica-Bold", 25),
       bgcolor: $color("red"),
@@ -1728,7 +1728,7 @@ const checkAdultView = {
   }, {
     type: "text",
     props: {
-      text: "本脚本运行内容包含成人影片、图片，可能会引起你的不适，请谨慎运行。\n未满十八岁，禁止运行。",
+      text: "This script contains adult videos and images that may cause discomfort. Please proceed with caution.\nUsers under 18 are prohibited from running it.",
       textColor: $color("white"),
       font: $font("bold", 14),
       bgcolor: $color("clear"),
@@ -1744,7 +1744,7 @@ const checkAdultView = {
   }, {
     type: "text",
     props: {
-      text: "提示",
+      text: "Notice",
       textColor: $color("red"),
       font: $font("Helvetica-Bold", 20),
       bgcolor: $color("black"),
@@ -1760,7 +1760,7 @@ const checkAdultView = {
   },{
     type: "text",
     props: {
-      text: "\n1.请将 http://xvideos.com 加入代理。\n2.轻按视频下方时间戳收藏视频\n3.长按视频下方时间戳下载视频",
+      text: "\n1. Add http://xvideos.com to your proxy.\n2. Tap the timestamp below a video to favorite it.\n3. Long-press the timestamp below a video to download it.",
       textColor: $color("red"),
       font: $font("bold", 14),
       bgcolor: $color("clear"),
@@ -1776,7 +1776,7 @@ const checkAdultView = {
   }, {
     type: "button",
     props: {
-      title: "已满十八岁",
+      title: "I am 18+",
       titleColor: $color("black"),
       bgcolor: $color("white")
     },
@@ -1794,7 +1794,7 @@ const checkAdultView = {
   }, {
     type: "button",
     props: {
-      title: "未满十八岁",
+      title: "I am under 18",
       titleColor: $color("white"),
       bgcolor: $color("red")
     },
@@ -1814,10 +1814,10 @@ const checkAdultView = {
 
 function wechatPay() {
   $ui.alert({
-    title: "确定赞赏？",
-    message: "点击确定二维码图片会自动存入相册同时会跳转至微信扫码,请选择相册中的二维码图片进行赞赏。",
+    title: "Confirm donation?",
+    message: "Tap Confirm to save the QR code to Photos and open WeChat scanner. Then choose the QR image from Photos to donate.",
     actions: [{
-        title: "确定",
+        title: "Confirm",
         handler: function() {
           let payUrl = "weixin://scanqrcode"
           $http.download({
@@ -1839,7 +1839,7 @@ function wechatPay() {
         }
       },
       {
-        title: "取消",
+        title: "Cancel",
         handler: function() {
 
         }
